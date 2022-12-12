@@ -1,0 +1,42 @@
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-6">
+        <div class="display-5 "> {{food.name}}</div>
+<br>
+    <img class="img-fluid d-block w-100
+     " src="{{food.image}}" alt="" >
+    </div> 
+    <div class="col-md-6">
+      <div class="display-5 "> Bigileriniz</div>
+      <br>
+       <form #myForm="ngForm" ><!--(ngSubmit)="onLogin()" -->
+        <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label">Adınız</label>
+          <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" [(ngModel)]="inputName" [ngModelOptions]="{standalone: true}"> 
+        </div>
+        <div class="mb-3">
+          <label for="exampleInputPassword1" class="form-label">Adres Bilgileriniz</label>
+          <textarea  [(ngModel)]="inputAdres" [ngModelOptions]="{standalone: true}" class="form-control" id="exampleInputPassword1"> </textarea>
+        </div>
+        <div class="mb-3">
+          <label for="adet" class="form-label" >Adet</label>
+        <select name="adet" id="adet" [(ngModel)]="inputCount" [ngModelOptions]="{standalone: true}">
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+          <option value="6">6</option>
+          <option value="7">7</option>
+          <option value="8">8</option>
+          <option value="9">9</option>
+          <option value="10">10</option>
+        </select>
+        Fiyat : {{food.prize * inputCount}}
+        </div>
+        <button   class="btn btn-primary" (click)="createOrder()">Satın Al</button>
+      </form>
+    </div>
+  </div>
+</div>

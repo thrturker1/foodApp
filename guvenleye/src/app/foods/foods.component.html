@@ -1,0 +1,85 @@
+<div class="container-fluid  ">
+  <div class="row">
+    <div class="col-md-2">
+      <h1 class="display-6">Kategori</h1>
+      <div class="list-group">
+        <form>
+          <label class="list-group-item">
+            <input class="form-check-input me-1" type="radio" name="filterfood" (click)="filterCategory('Çorba')">
+            Çorba
+          </label>
+          <label class="list-group-item">
+            <input class="form-check-input me-1" type="radio" name="filterfood" (click)="filterCategory('Ana Yemek')">
+            Ana Yemek
+          </label>
+          <label class="list-group-item">
+            <input class="form-check-input me-1" type="radio" name="filterfood" (click)="filterCategory('Fast Food')">
+            Fast Food
+          </label>
+          <label class="list-group-item">
+            <input class="form-check-input me-1" type="radio" name="filterfood" (click)="filterCategory('Ev Yemeği')">
+            Ev Yemeği
+          </label>
+          <label class="list-group-item">
+            <input class="form-check-input me-1" type="radio" name="filterfood" (click)="filterCategory('Tatlı')">
+            Tatlı
+          </label>
+          <label class="list-group-item">
+            <input class="btn btn-success" type="reset" name="" (click)="filterCategory('res')" >
+          
+          </label>
+        </form>
+      </div>
+
+      <br>
+      <h1 class="display-6">Fiyat</h1>
+      <div class="list-group">
+        <form>
+          <label class="list-group-item">
+            <input class="form-check-input me-1" type="radio" name="filterPrice" (click)="filterPrice(20)">
+            0-20 TL
+          </label>
+          <label class="list-group-item">
+            <input class="form-check-input me-1" type="radio" name="filterPrice" (click)="filterPrice(40)">
+            20-40 TL
+          </label>
+          <label class="list-group-item">
+            <input class="form-check-input me-1" type="radio" name="filterPrice" (click)="filterPrice(60)">
+            20-60 TL
+          </label>
+          <label class="list-group-item">
+            <input class="form-check-input me-1" type="radio" name="filterPrice" (click)="filterPrice(80)">
+            60-80 TL
+          </label>
+          <label class="list-group-item">
+            <input class="form-check-input me-1" type="radio" name="filterPrice" (click)="filterPrice(100)">
+            80-100 TL
+          </label>
+          <label class="list-group-item">
+            <input class="btn btn-success" type="reset" name="" (click)="filterPrice(0)" >
+          
+          </label>
+        </form>
+      </div>
+    </div>
+    <div class="col-md-10">
+      <div class="row">
+        <p>
+          Tercih etmedikleriniz : {{filterAlergen}}
+        </p>
+      </div>
+      <div class="row">
+        <div class="card" style="width:18rem;" *ngFor="let i of foodsDataShow">
+          <img src="{{i.image}}" class="card-img-top d-block w-100" alt="...">
+          <div class="card-body">
+            <h5 class="card-title">{{i.name}}</h5>
+            <h6 class="card-subtitle mb-2 text-muted ">Satıcı: {{i.companyName}} </h6>
+            <p class="card-text">{{i.prize}} TL </p>
+            <p class="card-text text-muted">Stok : {{i.count}} <button class="btn btn-success" (click)="gotoOrderPage(i.id)">Sipariş</button> </p>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
