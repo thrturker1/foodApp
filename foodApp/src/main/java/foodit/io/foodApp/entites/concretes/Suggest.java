@@ -11,36 +11,30 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Table(name = "foods")
+@Table(name = "suggestions")
 @Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Food {
-
+public class Suggest {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private int id;
 	
 	@Column(name = "name")
-	private String name;
-	
-	@Column(name = "count")
-	private int count;
-	
-	@Column(name = "prize")
-	private double prize;
-	
+	private String suggestName;
+
 	@Column(name = "alergens")
 	private String alergens;
-	
-	@Column(name = "company")
-	private String companyName;
-	
+
 	@Column(name = "type")
 	private String foodType;
 	
-	@Column(name = "image")
-	private String image;
+	@Column(name = "date")
+	private String date;
+	
+	@Column(name = "message")
+	private String message;
 }

@@ -48,7 +48,7 @@ public class FoodManager implements FoodService{
 		
 		else {
 			newFood.setId(food.getId());
-			newFood.setFoodName(food.getFoodName());
+			newFood.setName(food.getName());
 			newFood.setCount(food.getCount());
 			newFood.setPrize(food.getPrize());
 			newFood.setCompanyName(food.getCompanyName());

@@ -9,6 +9,8 @@ export default function ListOrders() {
     const [totalPrize, setTotalPrize] = useState();
     const [totalCount, setTotalCount] = useState();
 
+    const [suggests, setSuggests] = useState([]);
+    
     useEffect(() => {
         axios.get('http://localhost:8080/api/orders/getAll')
         .then(res => setOrders(res.data))

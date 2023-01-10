@@ -8,6 +8,7 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import Home from '@mui/icons-material/Home';
 import Adminler from '@mui/icons-material/Person';
 import Products from '@mui/icons-material/LunchDining';
+import MessageIcon from '@mui/icons-material/Email';
 import { Link } from 'react-router-dom';
 
 export default function IconMenu() {
@@ -43,6 +44,17 @@ export default function IconMenu() {
             <ListItemText>Adminler</ListItemText>
           </MenuItem>
         </Link>
+
+        <Divider />
+
+      <Link to = '/listsuggests'>
+        <MenuItem>
+        <ListItemIcon>
+          <MessageIcon fontSize = "small" />
+        </ListItemIcon>
+        <ListItemText>Öneriler</ListItemText>
+        </MenuItem>
+      </Link>
 
       </MenuList>
     </Paper>

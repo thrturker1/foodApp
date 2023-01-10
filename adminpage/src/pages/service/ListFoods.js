@@ -5,7 +5,7 @@ import axios from 'axios'
 
 export default function ListFoods() {
     const [foods, setFoods] = useState([]);
-    const [foodName, setFoodName] = useState('');
+    const [name, setName] = useState('');
     const [count, setCount] = useState();
     const [prize, setPrize] = useState();
     const [alergens, setAlergens] = useState('');
@@ -22,7 +22,7 @@ export default function ListFoods() {
     const postFood = (e) => {
         e.preventDefault();
         axios.post('http://localhost:8080/api/foods',{
-            foodName,
+            name,
             count,
             prize,
             alergens,
@@ -36,7 +36,7 @@ export default function ListFoods() {
     const postDelete = (id,e) => {
         e.preventDefault();
         axios.delete(`http://localhost:8080/api/foods/${id}`,{
-            foodName,
+            name,
             count,
             prize,
             alergens,
@@ -51,7 +51,7 @@ const arr = foods.map((foods,index) => {
     return (
         <tr>
             <td style = {{border : '1 px solid red'}}>{foods.id}</td>
-            <td style = {{border : '1 px solid red'}}>{foods.foodName}</td>
+            <td style = {{border : '1 px solid red'}}>{foods.name}</td>
             <td style = {{border : '1 px solid red'}}>{foods.count} adet</td>
             <td style = {{border : '1 px solid red'}}>{foods.prize} TL</td>
             <td style = {{border : '1 px solid red'}}>{foods.alergens}</td>        
@@ -65,7 +65,7 @@ const arr = foods.map((foods,index) => {
   return (
     <div>
       <Header />
-      <LeftMenu />
+        <LeftMenu />
       <table style = {{border: '2px solid red', marginLeft : '100px', marginTop : '10px'}}>
         <th style = {{border: '1px solid red'}}>ID</th>
         <th style = {{border: '1px solid red'}}>Yemek Adı</th>
@@ -77,7 +77,7 @@ const arr = foods.map((foods,index) => {
         <th style = {{border: '1px solid red'}}>Resim</th>
         <tr>
             <td style = {{border: '1px solid red'}}>Food Id</td>
-            <td style = {{border: '1px solid red'}}><input type = 'text' value = {foodName} onChange = {(e) => setFoodName(e.target.value)}></input></td>
+            <td style = {{border: '1px solid red'}}><input type = 'text' value = {name} onChange = {(e) => setName(e.target.value)}></input></td>
             <td style = {{border: '1px solid red'}}><input type = 'text' value = {count} onChange = {(e) => setCount(e.target.value)}></input></td>
             <td style = {{border: '1px solid red'}}><input type = 'text' value = {prize} onChange = {(e) => setPrize(e.target.value)}></input></td>
             <td style = {{border: '1px solid red'}}><input type = 'text' value = {companyName} onChange = {(e) => setCompanyName(e.target.value)}></input></td>
