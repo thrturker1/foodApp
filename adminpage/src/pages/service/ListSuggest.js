@@ -13,22 +13,26 @@ export default function ListSuggest() {
   const [date, setDate] = useState('')
   const [message, setMessage] = useState('');
 
+  const[acceptedSuggests, setAcceptedSuggests] = useState([]);
+  const [acceptedName, setAcceptedName] = useState('');
+  const [acceptedAlergen, setAcceptedAlergen] = useState('');
+
   useEffect(() => {
     axios.get('http://localhost:8080/api/suggests/getAll')
       .then(res => setSuggests(res.data))
       .catch(console.error())
   }, [])
 
-  const acceptSuggest = (id, e) => {
+  const acceptSuggest = (sugname,sugalergen,id,e) => {
+    setAcceptedName(sugname);
+    setAcceptedAlergen(sugalergen);
+    <p>{sugname}</p>
     e.preventDefault();
-    axios.post('http://localhost:8080/api/suggests', {
-      suggestName,
-      alergen,
-      foodType,
-      date,
-      message
+    axios.post('http://localhost:8080/api/acceptedsuggests', {
+      acceptedName,
+      acceptedAlergen,
     }).then(res => console.log("Posting...", res).catch(err => console.log(err)))
-    window.location.reload(false);
+    deletePost(id,e);
   }
 
   const deletePost = (id, e) => {
@@ -52,10 +56,11 @@ export default function ListSuggest() {
         <td style={{ border: '1px solid red' }}>{suggests.date}</td>
         <td style={{ border: '1px solid red' }}>{suggests.alergens}</td>
         <td style={{ border: '1px solid red' }}>
-          <button onClick={(e) => acceptSuggest(suggests.id, e)}>accept</button>
+          <button onClick={(e) => acceptSuggest(suggests.suggestName,suggests.alergens,suggests.id,e)}>accept</button>
           <button onClick={(e) => deletePost(suggests.id, e)}>delete</button>
         </td>
       </tr>
+      
     )
   })
 
