@@ -56,7 +56,7 @@ export default function ListAdmins() {
 
             <Header />
             <LeftMenu />
-            
+            <h3>Adminler</h3>
             <table style = {{border :'2px solid red', marginTop: '10px',marginLeft : '380px'}}>
                 <th style = {{border : '1px solid red'}}>ID</th>
                 <th style = {{border : '1px solid red'}}>İsim</th>

@@ -13,9 +13,11 @@ export default function ListSuggest() {
   const [date, setDate] = useState('')
   const [message, setMessage] = useState('');
 
-  const[acceptedSuggests, setAcceptedSuggests] = useState([]);
-  const [acceptedName, setAcceptedName] = useState('');
-  const [acceptedAlergen, setAcceptedAlergen] = useState('');
+  const [acceptedSuggests, setAcceptedSuggests] = useState([]);
+  const [acceptedName, setAcceptedName] = useState('Name');
+  const [acceptedAlergen, setAcceptedAlergen] = useState('Alergen');
+  const [areYouSure, setAreYouSure] = useState(false);
+  const [variable, setVariable] = useState(1);
 
   useEffect(() => {
     axios.get('http://localhost:8080/api/suggests/getAll')
@@ -23,19 +25,36 @@ export default function ListSuggest() {
       .catch(console.error())
   }, [])
 
-  const acceptSuggest = (sugname,sugalergen,id,e) => {
-    setAcceptedName(sugname);
-    setAcceptedAlergen(sugalergen);
-    <p>{sugname}</p>
-    e.preventDefault();
-    axios.post('http://localhost:8080/api/acceptedsuggests', {
-      acceptedName,
-      acceptedAlergen,
-    }).then(res => console.log("Posting...", res).catch(err => console.log(err)))
-    deletePost(id,e);
+  const acceptSuggest = (sugname, sugalergen, id, e) => {
+    if (variable == 1) {
+      setacceptedalergen(sugalergen)
+      setacceptedname(sugname)
+      setVariable(2)
+    }
+    else if (variable == 2) {
+      setVariable(1)
+      e.preventDefault();
+      axios.post('http://localhost:8080/api/acceptedsuggests', {
+        acceptedName,
+        acceptedAlergen,
+      }).then(res => console.log("Posting.." + sugname + sugalergen + id, res).catch(err => console.log(err)))
+
+      axios.delete(`http://localhost:8080/api/suggests/${id}`, {
+        suggestName,
+        alergen,
+        foodType,
+        date,
+        message
+      }).then(res => console.log("Deleting", res).catch(err => console.log(err)))
+      window.location.reload(false)
+    }
   }
 
   const deletePost = (id, e) => {
+
+    if (!areYouSure) {
+
+    }
     e.preventDefault();
     axios.delete(`http://localhost:8080/api/suggests/${id}`, {
       suggestName,
@@ -47,8 +66,17 @@ export default function ListSuggest() {
     window.location.reload(false);
   }
 
+  const setacceptedname = (e) => {
+    setAcceptedName(e)
+  }
+
+  const setacceptedalergen = (e) => {
+    setAcceptedAlergen(e)
+  }
+
   const arr = suggests.map((suggests, index) => {
     return (
+
       <tr>
         <td style={{ border: '1px solid red' }}>{suggests.suggestName}</td>
         <td style={{ border: '1px solid red' }}>{suggests.foodType}</td>
@@ -56,11 +84,11 @@ export default function ListSuggest() {
         <td style={{ border: '1px solid red' }}>{suggests.date}</td>
         <td style={{ border: '1px solid red' }}>{suggests.alergens}</td>
         <td style={{ border: '1px solid red' }}>
-          <button onClick={(e) => acceptSuggest(suggests.suggestName,suggests.alergens,suggests.id,e)}>accept</button>
-          <button onClick={(e) => deletePost(suggests.id, e)}>delete</button>
+          <button style={{ marginRight: '5px', marginLeft: '5px' }} onClick={(e) => acceptSuggest(suggests.suggestName, suggests.alergens, suggests.id, e)}>Kabul et</button>
+          <button style={{ marginRight: '5px' }} onClick={(e) => deletePost(suggests.id, e)}>Sil</button>
         </td>
       </tr>
-      
+
     )
   })
 
@@ -72,7 +100,7 @@ export default function ListSuggest() {
           <LeftMenu />
         </Grid>
         <Grid sx={10}>
-          <h1 style={{minWidth : '1230px', marginTop: '150px', backgroundColor: 'lightgray',}}>Müşterilerden Gelen Öneriler</h1>
+          <h1 style={{ minWidth: '1230px', marginTop: '150px', backgroundColor: 'lightgray', }}>Müşterilerden Gelen Öneriler</h1>
           <h2 style={{ marginRight: '200px' }}>Öneriler</h2>
           <table style={{ border: '2px solid red', marginLeft: '50px', marginRight: '10px' }}>
             <th style={{ border: '1px solid red' }}>Yemek Adı</th>
