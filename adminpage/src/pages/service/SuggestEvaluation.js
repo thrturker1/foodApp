@@ -25,7 +25,6 @@ export default function SuggestEvaluation() {
     {
       alert('Lütfen bir yiyecek türü belirtiniz.')
     }
-
     else{
     e.preventDefault();
     axios.post('http://localhost:8080/api/suggests', {
